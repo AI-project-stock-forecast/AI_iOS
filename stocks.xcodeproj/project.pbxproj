@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC74D3E52830130B00B25992 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74D3E42830130B00B25992 /* Graph.swift */; };
 		ECDB7752282C934500D6CCFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDB7751282C934500D6CCFF /* AppDelegate.swift */; };
 		ECDB7754282C934500D6CCFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDB7753282C934500D6CCFF /* SceneDelegate.swift */; };
 		ECDB7759282C934500D6CCFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDB7757282C934500D6CCFF /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		28444989EAB7DC114B03C7CE /* Pods-stocks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocks.debug.xcconfig"; path = "Target Support Files/Pods-stocks/Pods-stocks.debug.xcconfig"; sourceTree = "<group>"; };
 		459C933C0EE3CD56B757F91F /* Pods_stocks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_stocks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D61494BCAED21374AA709248 /* Pods-stocks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocks.release.xcconfig"; path = "Target Support Files/Pods-stocks/Pods-stocks.release.xcconfig"; sourceTree = "<group>"; };
+		EC74D3E42830130B00B25992 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		ECDB774E282C934500D6CCFF /* stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDB7751282C934500D6CCFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECDB7753282C934500D6CCFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDB7767282C96DC00D6CCFF /* Stock.swift */,
+				EC74D3E42830130B00B25992 /* Graph.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			files = (
 				ECDB7752282C934500D6CCFF /* AppDelegate.swift in Sources */,
 				ECDB776C282C972100D6CCFF /* GraphViewController.swift in Sources */,
+				EC74D3E52830130B00B25992 /* Graph.swift in Sources */,
 				ECDB7768282C96DC00D6CCFF /* Stock.swift in Sources */,
 				ECDB776A282C971500D6CCFF /* ListsViewController.swift in Sources */,
 				ECDB7754282C934500D6CCFF /* SceneDelegate.swift in Sources */,
