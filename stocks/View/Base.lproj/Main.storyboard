@@ -17,13 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="회사 이름을 입력해주세요" translatesAutoresizingMaskIntoConstraints="NO" id="R1P-fm-FoZ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
-                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6QF-2x-opQ">
-                                <rect key="frame" x="0.0" y="139" width="414" height="723"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="list" rowHeight="68" id="4dy-Ru-9xL" customClass="ListTableViewCell" customModule="stocks" customModuleProvider="target">
@@ -127,18 +122,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6QF-2x-opQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2d4-ie-wHr"/>
-                            <constraint firstItem="R1P-fm-FoZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4G3-H9-Llp"/>
-                            <constraint firstItem="R1P-fm-FoZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HkJ-ad-FPI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6QF-2x-opQ" secondAttribute="bottom" id="YzI-O2-6Yq"/>
-                            <constraint firstItem="R1P-fm-FoZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gDO-8x-PpC"/>
-                            <constraint firstItem="6QF-2x-opQ" firstAttribute="top" secondItem="R1P-fm-FoZ" secondAttribute="bottom" id="np0-ZZ-XS8"/>
+                            <constraint firstItem="6QF-2x-opQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iTu-O1-HRa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6QF-2x-opQ" secondAttribute="trailing" id="pnE-JC-zNu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stock" id="EHG-C2-4JV"/>
                     <connections>
-                        <outlet property="listSearch" destination="R1P-fm-FoZ" id="gXH-Vi-cJJ"/>
                         <outlet property="listTable" destination="6QF-2x-opQ" id="mMP-rb-Xb8"/>
+                        <outlet property="nav" destination="EHG-C2-4JV" id="mc7-D3-XOt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -237,7 +229,7 @@
                                     <segue destination="hpV-to-3RO" kind="embed" id="yWi-zd-DHP"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEo-QT-Xyt" customClass="BarChartView" customModule="Charts">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEo-QT-Xyt" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="295" width="414" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="6lG-Nb-PW9"/>
@@ -287,9 +279,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="n1o-k7-0cm"/>
                     <connections>
+                        <outlet property="company" destination="CGk-na-alz" id="Adt-b5-60w"/>
                         <outlet property="nowpresent" destination="R1n-OW-FOu" id="UwC-15-TmF"/>
                         <outlet property="onefuture" destination="yEo-QT-Xyt" id="nzI-wF-Muj"/>
                         <outlet property="onepast" destination="F1K-WA-wCQ" id="C84-Qe-Ope"/>
+                        <outlet property="predict" destination="Xh1-vC-0za" id="8B3-DH-8nF"/>
+                        <outlet property="today" destination="kf1-NO-E6K" id="8UX-23-5aC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2uO-bD-ci0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -321,6 +316,7 @@
                     <view key="view" contentMode="scaleToFill" id="rN7-Eb-6wD" customClass="LineChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="J2x-ia-zwH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -335,6 +331,7 @@
                     <view key="view" contentMode="scaleToFill" id="XTs-Bb-zDr" customClass="LineChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="lCy-ya-N3M"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -349,6 +346,7 @@
                     <view key="view" contentMode="scaleToFill" id="9Bo-Nf-Zdc" customClass="BarChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="sAG-Ty-Pw1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
