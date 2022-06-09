@@ -13,17 +13,11 @@ struct basesAPI {
 }
 
 struct stocks : Codable {
+    
     var name : String //제목
     var currentPrice : Int //현재가
     var upsidePredictionRate : String //상승률
     var tradingVolume : String //거래량
-    
-    init(_ name : String, _ currentPrice : Int, _ upsidePredictionRate : String, _ tradingVolume : String){
-        self.name = name
-        self.currentPrice = currentPrice
-        self.upsidePredictionRate = upsidePredictionRate
-        self.tradingVolume = tradingVolume
-    }
 }
 
 enum moneyGraph {
@@ -59,8 +53,7 @@ extension moneyGraph : TargetType {
         }
     }
     
-    // 이 부분이 이해가안감.. ( 임시로 리턴은 requestPlain으로 설정 )
-    var task: Task {
+    var task: Task { //Task에 대한 이해도 필요
         switch self {
         case .name :
             return .requestPlain

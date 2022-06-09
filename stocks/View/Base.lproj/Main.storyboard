@@ -209,17 +209,6 @@
                                 <color key="textColor" name="Sub"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hKx-KD-FUH">
-                                <rect key="frame" x="0.0" y="254" width="414" height="32"/>
-                                <segments>
-                                    <segment title="1주일 전"/>
-                                    <segment title="현재"/>
-                                    <segment title="1주일 후"/>
-                                </segments>
-                                <connections>
-                                    <action selector="switchGraph:" destination="bWz-K5-OdY" eventType="valueChanged" id="UP7-41-yS7"/>
-                                </connections>
-                            </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1n-OW-FOu" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="295" width="414" height="400"/>
                                 <constraints>
@@ -229,51 +218,24 @@
                                     <segue destination="hpV-to-3RO" kind="embed" id="yWi-zd-DHP"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEo-QT-Xyt" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="295" width="414" height="400"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="6lG-Nb-PW9"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="WEV-yP-wYE" kind="embed" id="CwY-zk-T2F"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1K-WA-wCQ" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="295" width="414" height="400"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="TGA-Ai-eN1"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="5N5-v0-bCU" kind="embed" id="WQW-MB-nti"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYQ-8B-Xda"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hKx-KD-FUH" firstAttribute="top" secondItem="iWM-DS-41D" secondAttribute="bottom" constant="70" id="2gm-er-aX0"/>
                             <constraint firstItem="Xj5-Zs-ohd" firstAttribute="leading" secondItem="kf1-NO-E6K" secondAttribute="trailing" constant="10" id="58i-Bl-Glq"/>
                             <constraint firstItem="MYv-UI-HBz" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" constant="60" id="6g6-1a-V9r"/>
-                            <constraint firstItem="R1n-OW-FOu" firstAttribute="top" secondItem="hKx-KD-FUH" secondAttribute="bottom" constant="10" id="7w0-tb-nkR"/>
+                            <constraint firstItem="R1n-OW-FOu" firstAttribute="top" secondItem="iWM-DS-41D" secondAttribute="bottom" constant="111" id="Akd-KE-jVT"/>
                             <constraint firstItem="R1n-OW-FOu" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" id="D3n-Fk-si7"/>
-                            <constraint firstItem="hKx-KD-FUH" firstAttribute="trailing" secondItem="aYQ-8B-Xda" secondAttribute="trailing" id="DLw-iu-55H"/>
                             <constraint firstItem="Xh1-vC-0za" firstAttribute="leading" secondItem="Xj5-Zs-ohd" secondAttribute="trailing" id="EcE-9Y-2dY"/>
                             <constraint firstItem="kf1-NO-E6K" firstAttribute="leading" secondItem="MYv-UI-HBz" secondAttribute="trailing" id="FeU-Zo-tVm"/>
                             <constraint firstItem="MYv-UI-HBz" firstAttribute="top" secondItem="CGk-na-alz" secondAttribute="bottom" constant="10" id="Fh3-e2-aI9"/>
                             <constraint firstItem="Xj5-Zs-ohd" firstAttribute="top" secondItem="aYQ-8B-Xda" secondAttribute="top" constant="90" id="Gac-HO-hGy"/>
                             <constraint firstItem="iWM-DS-41D" firstAttribute="top" secondItem="MYv-UI-HBz" secondAttribute="bottom" constant="10" id="IHE-mS-tzK"/>
-                            <constraint firstItem="F1K-WA-wCQ" firstAttribute="trailing" secondItem="aYQ-8B-Xda" secondAttribute="trailing" id="LXY-me-GJt"/>
                             <constraint firstItem="CGk-na-alz" firstAttribute="top" secondItem="aYQ-8B-Xda" secondAttribute="top" constant="50" id="MAP-UW-WMU"/>
-                            <constraint firstItem="yEo-QT-Xyt" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" id="MJt-e1-H04"/>
                             <constraint firstItem="Xh1-vC-0za" firstAttribute="top" secondItem="aYQ-8B-Xda" secondAttribute="top" constant="90" id="OVx-QO-EcK"/>
-                            <constraint firstItem="F1K-WA-wCQ" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" id="Pbx-dQ-DU3"/>
                             <constraint firstItem="kf1-NO-E6K" firstAttribute="top" secondItem="CGk-na-alz" secondAttribute="bottom" constant="10" id="SxE-uf-XNM"/>
-                            <constraint firstItem="hKx-KD-FUH" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" id="V84-ms-11n"/>
-                            <constraint firstItem="F1K-WA-wCQ" firstAttribute="top" secondItem="hKx-KD-FUH" secondAttribute="bottom" constant="10" id="Whd-I0-jO8"/>
-                            <constraint firstItem="aYQ-8B-Xda" firstAttribute="trailing" secondItem="yEo-QT-Xyt" secondAttribute="trailing" id="bAg-Jx-hh1"/>
                             <constraint firstItem="aYQ-8B-Xda" firstAttribute="trailing" secondItem="R1n-OW-FOu" secondAttribute="trailing" id="ohP-9r-iuL"/>
                             <constraint firstItem="iWM-DS-41D" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" constant="55" id="vVv-d3-hNe"/>
-                            <constraint firstItem="yEo-QT-Xyt" firstAttribute="top" secondItem="hKx-KD-FUH" secondAttribute="bottom" constant="10" id="xjh-I3-DGR"/>
                             <constraint firstItem="CGk-na-alz" firstAttribute="leading" secondItem="aYQ-8B-Xda" secondAttribute="leading" constant="55" id="zrr-lG-uGw"/>
                         </constraints>
                     </view>
@@ -281,8 +243,6 @@
                     <connections>
                         <outlet property="company" destination="CGk-na-alz" id="Adt-b5-60w"/>
                         <outlet property="nowpresent" destination="R1n-OW-FOu" id="UwC-15-TmF"/>
-                        <outlet property="onefuture" destination="yEo-QT-Xyt" id="nzI-wF-Muj"/>
-                        <outlet property="onepast" destination="F1K-WA-wCQ" id="C84-Qe-Ope"/>
                         <outlet property="predict" destination="Xh1-vC-0za" id="8B3-DH-8nF"/>
                         <outlet property="today" destination="kf1-NO-E6K" id="8UX-23-5aC"/>
                     </connections>
@@ -322,37 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W02-Xs-2d1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="674"/>
-        </scene>
-        <!--Graph View Controller-->
-        <scene sceneID="26E-1x-uMF">
-            <objects>
-                <viewController id="WEV-yP-wYE" customClass="GraphViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XTs-Bb-zDr" customClass="LineChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="lCy-ya-N3M"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JGe-a7-liF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2677" y="674"/>
-        </scene>
-        <!--Graph View Controller-->
-        <scene sceneID="LAm-sd-HOh">
-            <objects>
-                <viewController id="5N5-v0-bCU" customClass="GraphViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9Bo-Nf-Zdc" customClass="BarChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="sAG-Ty-Pw1"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yHN-H8-xrl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1075" y="674"/>
+            <point key="canvasLocation" x="1857" y="662"/>
         </scene>
     </scenes>
     <resources>

@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import SnapKit
-import Then
+import Moya
 
 class ListsViewController: UIViewController {
     
@@ -16,7 +15,10 @@ class ListsViewController: UIViewController {
     
     let listSearch = UISearchController()
     
-    var company : [stocks] = [] //모든 회사이름
+    var stockData : [stocks] = []
+    var stockD : stocks? //cellData
+    let provider = MoyaProvider<moneyGraph>()
+    
     var filterCompany : [stocks] = [] //필터링된 회사이름
     
     var dummy = ["애플", "삼성", "테슬라", "현대", "대한항공", "제주여객", "애플", "삼성", "테슬라", "현대", "대한항공", "제주여객", "애플", "삼성", "테슬라", "현대", "대한항공", "제주여객"]
@@ -27,7 +29,26 @@ class ListsViewController: UIViewController {
         listTable?.delegate = self
         listTable?.dataSource = self
         
+        requests()
         searches()
+    }
+    
+    func requests() {
+        
+        //하나씩? 그룹으로 묶고 하나에 다?
+        provider.request(.name) { (result) in
+            switch result {
+            case let .success(response) :
+                let result = try? JSONDecoder().decode([stocks].self, from: response.data)
+                
+                DispatchQueue.main.sync {
+                    self.stockData = result!
+                    self.listTable?.reloadData()
+                }
+            case let .failure(error) :
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func searches() {
@@ -45,9 +66,9 @@ class ListsViewController: UIViewController {
 
 extension ListsViewController : UISearchResultsUpdating {
     
-    func filteredContentForSearchText(_ searchText:String){
-        filterCompany = company.filter( { (stocks) -> Bool in
-            return stocks.name.lowercased().contains(searchText.lowercased())
+    func filteredContentForSearchText(_ searchText:String) {
+        filterCompany = stockData.filter( { (stocks) -> Bool in
+            return (stocks.name.lowercased().contains(searchText.lowercased()))
         })
         listTable?.reloadData()
     }
@@ -60,18 +81,18 @@ extension ListsViewController : UISearchResultsUpdating {
 extension ListsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummy.count //return company.count ( 약 100개정도? )
+        return stockData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = listTable?.dequeueReusableCell(withIdentifier: "list", for: indexPath) as! ListTableViewCell
         
-        cell.company?.text = self.dummy[indexPath.row]
+        cell.company?.text = "\(String(describing: stockD? .name))" //dummy의 type는 [String]
         cell.present?.text = "현재가"
-        cell.presentmoney?.text = "280,000"
-        cell.predicts?.text = "+30%"
-        cell.deal?.text = "430,000"
+        cell.presentmoney?.text = "\(String(describing: stockD?.currentPrice))"
+        cell.predicts?.text = "\(String(describing: stockD?.upsidePredictionRate))"
+        cell.deal?.text = "\(String(describing: stockD?.tradingVolume))"
         
         return cell
     }
