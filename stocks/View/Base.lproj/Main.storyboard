@@ -209,7 +209,7 @@
                                 <color key="textColor" name="Sub"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1n-OW-FOu" customClass="LineChartView" customModule="Charts">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1n-OW-FOu" customClass="CandleStickChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="295" width="414" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="dI8-uP-ikE"/>
@@ -242,7 +242,7 @@
                     <navigationItem key="navigationItem" id="n1o-k7-0cm"/>
                     <connections>
                         <outlet property="company" destination="CGk-na-alz" id="Adt-b5-60w"/>
-                        <outlet property="nowpresent" destination="R1n-OW-FOu" id="UwC-15-TmF"/>
+                        <outlet property="nowPresent" destination="R1n-OW-FOu" id="44s-dw-HKz"/>
                         <outlet property="predict" destination="Xh1-vC-0za" id="8B3-DH-8nF"/>
                         <outlet property="today" destination="kf1-NO-E6K" id="8UX-23-5aC"/>
                     </connections>

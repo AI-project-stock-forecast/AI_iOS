@@ -15,13 +15,15 @@ class ListsViewController: UIViewController {
     
     let listSearch = UISearchController()
     
-    var stockData : [stocks] = []
-    var stockD : stocks? //cellData
+    //get해온 데이터 저장할 배열
+    var nameData : [String] = [] //String
+    var presentData : [Any] = [] //Int
+    var upside : [Any] = [] //String
+    var trade : [Any] = [] //String
+    
     let provider = MoyaProvider<moneyGraph>()
     
     var filterCompany : [stocks] = [] //필터링된 회사이름
-    
-    var dummy = ["애플", "삼성", "테슬라", "현대", "대한항공", "제주여객", "애플", "삼성", "테슬라", "현대", "대한항공", "제주여객", "애플", "삼성", "테슬라", "현대", "대한항공", "제주여객"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,20 +31,64 @@ class ListsViewController: UIViewController {
         listTable?.delegate = self
         listTable?.dataSource = self
         
-        requests()
+        request()
         searches()
     }
     
-    func requests() {
+    func request() {
         
-        //하나씩? 그룹으로 묶고 하나에 다?
+        //code는 검색할 때 사용?
+        
         provider.request(.name) { (result) in
+            switch result {
+            case let .success(response) :
+                //let result = try? JSONDecoder().decode([stocks].self, from: response.data)
+                let result = try? response.mapJSON()
+                
+                DispatchQueue.main.sync {
+                    self.nameData = result as! [String] //받아온 데이터 namedata에 저장
+                    self.listTable?.reloadData()
+                }
+            case let .failure(error) :
+                print(error.localizedDescription)
+            }
+        }
+        
+        provider.request(.currentPrice) { (result) in
             switch result {
             case let .success(response) :
                 let result = try? JSONDecoder().decode([stocks].self, from: response.data)
                 
                 DispatchQueue.main.sync {
-                    self.stockData = result!
+                    self.presentData = result!
+                    self.listTable?.reloadData()
+                }
+            case let .failure(error) :
+                print(error.localizedDescription)
+            }
+        }
+        
+        provider.request(.upsidePredictionRate) { (result) in
+            switch result {
+            case let .success(response) :
+                let result = try? JSONDecoder().decode([stocks].self, from: response.data)
+                
+                DispatchQueue.main.sync {
+                    self.upside = result!
+                    self.listTable?.reloadData()
+                }
+            case let .failure(error) :
+                print(error.localizedDescription)
+            }
+        }
+        
+        provider.request(.tradingVolume) { (result) in
+            switch result {
+            case let .success(response) :
+                let result = try? JSONDecoder().decode([stocks].self, from: response.data)
+                
+                DispatchQueue.main.sync {
+                    self.trade = result!
                     self.listTable?.reloadData()
                 }
             case let .failure(error) :
@@ -58,41 +104,43 @@ class ListsViewController: UIViewController {
         nav?.titleView = listSearch.searchBar
         nav?.hidesSearchBarWhenScrolling = false
         
-        listSearch.searchResultsUpdater = self
+        //listSearch.searchResultsUpdater = self
         listSearch.obscuresBackgroundDuringPresentation = false
         listSearch.hidesNavigationBarDuringPresentation = false
     }
 }
 
-extension ListsViewController : UISearchResultsUpdating {
-    
-    func filteredContentForSearchText(_ searchText:String) {
-        filterCompany = stockData.filter( { (stocks) -> Bool in
-            return (stocks.name.lowercased().contains(searchText.lowercased()))
-        })
-        listTable?.reloadData()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        filteredContentForSearchText(listSearch.searchBar.text ?? "")
-    }
-}
+//extension ListsViewController : UISearchResultsUpdating {
+//
+//    func filteredContentForSearchText(_ searchText:String) {
+//        filterCompany = nameData.filter( { (stocks) -> Bool in
+//            return (stocks.name.lowercased().contains(searchText.lowercased()))
+//        })
+//        listTable?.reloadData()
+//    }
+//
+//    func updateSearchResults(for searchController: UISearchController) {
+//        filteredContentForSearchText(listSearch.searchBar.text ?? "")
+//    }
+//}
 
 extension ListsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stockData.count
+        return nameData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = listTable?.dequeueReusableCell(withIdentifier: "list", for: indexPath) as! ListTableViewCell
+        //검색했을 때 보이는 cell 설정은 어떻게?
         
-        cell.company?.text = "\(String(describing: stockD? .name))" //dummy의 type는 [String]
+        let cell = listTable?.dequeueReusableCell(withIdentifier: "list", for: indexPath) as! ListTableViewCell
+
+        cell.company?.text = nameData[indexPath.row]
         cell.present?.text = "현재가"
-        cell.presentmoney?.text = "\(String(describing: stockD?.currentPrice))"
-        cell.predicts?.text = "\(String(describing: stockD?.upsidePredictionRate))"
-        cell.deal?.text = "\(String(describing: stockD?.tradingVolume))"
+        cell.presentmoney?.text = presentData[indexPath.row] as? String
+        cell.predicts?.text = upside[indexPath.row] as? String
+        cell.deal?.text = trade[indexPath.row] as? String
         
         return cell
     }

@@ -8,12 +8,8 @@
 import UIKit
 import Moya
 
-struct basesAPI {
-    static let baseURL = "https://{BASE_URL}/" //주식 리스트
-}
-
 struct stocks : Codable {
-    
+    var code : Int //코드
     var name : String //제목
     var currentPrice : Int //현재가
     var upsidePredictionRate : String //상승률
@@ -21,6 +17,7 @@ struct stocks : Codable {
 }
 
 enum moneyGraph {
+    case code
     case name
     case currentPrice
     case upsidePredictionRate
@@ -30,11 +27,13 @@ enum moneyGraph {
 extension moneyGraph : TargetType {
     
     var baseURL: URL {
-        return URL(string: basesAPI.baseURL)!
+        return URL(string: baseAPI.baseURL)!
     }
     
     var path: String {
         switch self {
+        case .code:
+            return "stock/"
         case .name:
             return "stock/"
         case .currentPrice:
@@ -48,13 +47,15 @@ extension moneyGraph : TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .name, .currentPrice, .upsidePredictionRate, .tradingVolume :
+        case .code, .name, .currentPrice, .upsidePredictionRate, .tradingVolume :
             return .get
         }
     }
     
     var task: Task { //Task에 대한 이해도 필요
         switch self {
+        case .code :
+            return .requestPlain
         case .name :
             return .requestPlain
         case .currentPrice :

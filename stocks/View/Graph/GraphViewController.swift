@@ -10,8 +10,8 @@ import Charts
 
 class GraphViewController: UIViewController {
     
-    @IBOutlet weak var nowpresent : LineChartView?
-
+    @IBOutlet weak var nowPresent: CandleStickChartView?
+    
     @IBOutlet weak var company: UILabel? //회사
     @IBOutlet weak var today: UILabel? //현재가
     @IBOutlet weak var predict: UILabel? //예측률
@@ -23,15 +23,15 @@ class GraphViewController: UIViewController {
     }
     
     //그래프 변수 설정 : 서버에 나온대로 제작 예정
-    func setPresent(graph : [stocks]) {
+    func setPresent(graph : [datas]) {
         
         //데이터 생성 ( x = 회사이름, y = 값 ( 현재 / 예측 ) )
         let entries = graph.compactMap { [weak self] overview -> BarChartDataEntry? in
             guard let self = self else { return nil }
-            return BarChartDataEntry(
-                x: self.formattString(string: overview.name),
-                y: self.formattString(string: overview.tradingVolume)
-            )
+                return BarChartDataEntry(
+                    x: self.formattString(string: overview.title),
+                    y: self.formattString(string: overview.description)
+                )
         }
 
         let presentChart1 = LineChartDataSet(entries: entries, label: "")
@@ -39,27 +39,26 @@ class GraphViewController: UIViewController {
         presentChart1.colors = [.blue]
         presentChart1.highlightEnabled = false
         presentChart1.drawCirclesEnabled = false
-        
+                
         let presentChart2 = LineChartDataSet(entries: entries, label: "")
         presentChart2.lineDashLengths = [10]
         presentChart2.colors = [.red]
         presentChart2.highlightEnabled = false
         presentChart2.drawCirclesEnabled = false
-        
+                
         // 데이터 삽입
         let chartData = LineChartData(dataSet: [presentChart1, presentChart2] as! ChartDataSetProtocol)
-        nowpresent?.data = chartData
+        nowPresent?.data = chartData
 
-        nowpresent?.doubleTapToZoomEnabled = false
+        nowPresent?.doubleTapToZoomEnabled = false
 
-        nowpresent?.xAxis.labelPosition = .bottom
-        
+        nowPresent?.xAxis.labelPosition = .bottom
+                
         // X축 레이블 포맷 지정
         //onepast?.xAxis.valueFormatter = IndexAxisValueFormatter(values: <#T##[String]#>)
-
         // X축 레이블 갯수 최대로 설정 (이 코드 안쓸 시 Jan Mar May 이런식으로 띄엄띄엄 조금만 나옴)
-        nowpresent?.xAxis.setLabelCount(graph.count, force: false)
-        nowpresent?.rightAxis.enabled = false
+        nowPresent?.xAxis.setLabelCount(graph.count, force: false)
+        nowPresent?.rightAxis.enabled = false
     }
     
     override func viewDidLoad() {
