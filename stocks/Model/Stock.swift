@@ -8,20 +8,16 @@
 import UIKit
 import Moya
 
-struct stocks : Codable {
-    var code : Int //코드
-    var name : String //제목
-    var currentPrice : Int //현재가
-    var upsidePredictionRate : String //상승률
-    var tradingVolume : String //거래량
+struct baseAPI {
+    static let baseURL = "http://15.164.56.76:8000"
 }
 
 enum moneyGraph {
-    case code
-    case name
-    case currentPrice
-    case upsidePredictionRate
-    case tradingVolume
+    //한 명세에 하나의 case ( 제발 각각 넣지 마세요 )
+    case getList
+    case searchCode(_ event: String)
+    case getPrice(_ code: String)
+    case prediction(_ code: String)
 }
 
 extension moneyGraph : TargetType {
@@ -32,48 +28,27 @@ extension moneyGraph : TargetType {
     
     var path: String {
         switch self {
-        case .code:
-            return "stock/"
-        case .name:
-            return "stock/"
-        case .currentPrice:
-            return "stock/"
-        case .upsidePredictionRate:
-            return "stock/"
-        case .tradingVolume:
-            return "stock/"
+        case .getList:
+            return "/stock"
+        case .searchCode(let event):
+            return "/stock/\(event)"
+        case .getPrice(let code):
+            return "stock/price/\(code)"
+        case .prediction(let code):
+            return "stock/prediction/\(code)"
         }
     }
     
     var method: Moya.Method {
-        switch self {
-        case .code, .name, .currentPrice, .upsidePredictionRate, .tradingVolume :
-            return .get
-        }
+        return .get
     }
     
-    var task: Task { //Task에 대한 이해도 필요
-        switch self {
-        case .code :
-            return .requestPlain
-        case .name :
-            return .requestPlain
-        case .currentPrice :
-            return .requestPlain
-        case .upsidePredictionRate :
-            return .requestPlain
-        case .tradingVolume :
-            return .requestPlain
-        }
+    var task: Task { 
+        return .requestPlain
     }
     
     var headers: [String : String]? {
-        switch self {
-        default :
-            return ["Content-Type" : "application/json"]
-        }
+        return [:]
     }
-    
-    
 }
 
